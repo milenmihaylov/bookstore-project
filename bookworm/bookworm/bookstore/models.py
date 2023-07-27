@@ -20,7 +20,7 @@ class Author(models.Model):
 
 class Category(models.Model):
 	category = models.CharField(
-		max_length=15,
+		max_length=30,
 	)
 
 

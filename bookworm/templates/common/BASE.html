@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Title -->
+	<title>{% block title %}{% endblock %}</title>
+
+	{% include 'common/header/head-formatting.html' %}
+</head>
+<body>
+
+    <!--===== HEADER CONTENT =====-->
+	{% include 'common/HEADER.html' %}
+    <!--===== END HEADER CONTENT =====-->
+
+    <!-- ====== MAIN CONTENT ===== -->
+	{% block main_content %}
+	{% endblock %}
+    <!-- ====== END MAIN CONTENT ===== -->
+
+    <!-- ========== FOOTER ========== -->
+    {% include 'common/FOOTER.html' %}
+    <!-- ========== END FOOTER ========== -->
+
+   	{% include 'common/scripts.html' %}
+
+</body>
+</html>
