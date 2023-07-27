@@ -33,6 +33,7 @@ INSTALLED_APPS = [
 
 	'bookworm.bookstore',
 	'bookworm.core',
+	'bookworm.blog',
 ]
 
 MIDDLEWARE = [
