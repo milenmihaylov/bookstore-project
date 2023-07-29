@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
+class Article(models.Model):
+	writer = models.CharField(
+		max_length=30,
+	)
+	text = models.TextField()
+	image = models.ImageField(
+		upload_to='images/blog',
+	)
