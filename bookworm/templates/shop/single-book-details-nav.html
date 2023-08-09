@@ -1,0 +1,19 @@
+<div class="border-top border-bottom">
+	<ul class="container tabs wc-tabs nav justify-content-md-center flex-nowrap flex-md-wrap overflow-auto overflow-md-visble">
+		<li class="flex-shrink-0 flex-md-shrink-1 nav-item active">
+			<a class="nav-link py-4 font-weight-medium active" href="#Description">
+				Description
+			</a>
+		</li>
+		<li class="flex-shrink-0 flex-md-shrink-1 nav-item">
+			<a class="nav-link py-4 font-weight-medium" href="#ProductDetails">
+				Product Details
+			</a>
+		</li>
+		<li class="flex-shrink-0 flex-md-shrink-1 nav-item">
+			<a class="nav-link py-4 font-weight-medium" href="#ProductReviews">
+				Reviews ({{ book.review_set.count }})
+			</a>
+		</li>
+	</ul>
+</div>

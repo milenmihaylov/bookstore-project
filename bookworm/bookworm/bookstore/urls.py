@@ -2,6 +2,7 @@ from django.urls import path
 
 from bookworm.bookstore.views.author import AuthorCreateView, AuthorUpdateView, AuthorDeleteView, AuthorDetailView, \
 	AuthorsListView
+from bookworm.bookstore.views.book import BookDetailView, BookCreateView, AddToWishlistView, ReviewBookView
 from bookworm.bookstore.views.category import CategoryCreateView, CategoryUpdateView, CategoryDeleteView, \
 	CategoryListView
 from bookworm.bookstore.views.index import IndexView
@@ -19,4 +20,10 @@ urlpatterns = [
 	path('create-category/', CategoryCreateView.as_view(), name='create category'),
 	path('update-category/<int:pk>/', CategoryUpdateView.as_view(), name='update category'),
 	path('delete-category/<int:pk>/', CategoryDeleteView.as_view(), name='delete category'),
+
+	path('book/<int:pk>/', BookDetailView.as_view(), name='book detail'),
+	path('create-book/', BookCreateView.as_view(), name='create book'),
+
+	path('add-to-wishlist/<int:pk>', AddToWishlistView.as_view(), name='add to wishlist'),
+	path('submit-review/', ReviewBookView.as_view(), name='submit review'),
 ]

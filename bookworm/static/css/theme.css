@@ -459,6 +459,38 @@ h6, .h6 {
   font-size: 1rem;
 }
 
+/* Add this to your CSS file or style block in your HTML template */
+
+.star-rating {
+    display: inline-block;
+    font-size: 24px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+}
+
+.star-rating label::before {
+    content: '\f005';
+	font-family: 'Font Awesome 5 Free', serif;
+    font-weight: 900;
+    padding: 2px;
+}
+
+.star-rating label.fas::before {
+    content: '\f005';
+    color: gold;
+}
+
+.star-rating label.far::before {
+    content: '\f005';
+    color: gray;
+}
+
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
@@ -21714,7 +21746,7 @@ a.text-red-1:hover, a.text-red-1:focus {
   .table, .widget_calendar table {
     border-collapse: collapse !important;
   }
-  
+
   .table td,
   .widget_calendar table td, .table th, .widget_calendar table th {
     background-color: #fff !important;
@@ -26103,3 +26135,4 @@ footer .widget select.custom-select, .widget_search .custom-select.search-field 
 /*------------------------------------
   File for your custom SCSS style
 ------------------------------------*/
+
