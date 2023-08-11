@@ -23,7 +23,7 @@
 				<!-- Content -->
 				<div class="js-scrollbar u-sidebar__body">
 					<div class="u-sidebar__content u-header-sidebar__content">
-						<form class="">
+						<!-- <form class=""> -->
 							<!-- Login -->
 							<div id="login" data-target-group="idForm">
 								<!-- Title -->
@@ -36,8 +36,8 @@
 									<!-- Form Group -->
 									<div class="form-group mb-4">
 										<div class="js-form-message js-focus-state">
-											<label id="signinEmailLabel" class="form-label" for="signinEmail">Username or email *</label>
-											<input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel" required>
+											<label id="signinEmailLabel" class="form-label" for="signinEmail">Email *</label>
+											<!-- <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail" placeholder="ilovebooks@bookworm.com" aria-label="ilovebooks@bookworm.com" aria-describedby="signinEmailLabel" required> -->
 										</div>
 									</div>
 									<!-- End Form Group -->
@@ -46,7 +46,7 @@
 									<div class="form-group mb-4">
 										<div class="js-form-message js-focus-state">
 											<label id="signinPasswordLabel" class="form-label" for="signinPassword">Password *</label>
-											<input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword" placeholder="" aria-label="" aria-describedby="signinPasswordLabel" required>
+											<!-- <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword" placeholder="" aria-label="" aria-describedby="signinPasswordLabel" required> -->
 										</div>
 									</div>
 									<!-- End Form Group -->
@@ -72,19 +72,20 @@
 									</div>
 
 									<div class="mb-4d75">
-										<button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Sign In</button>
+										<button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Log In</button>
 									</div>
 
-									<div class="mb-2">
-										<a href="javascript:;" class="js-animation-link btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium"
-										data-target="#signup"
-										data-link-group="idForm"
-										data-animation-in="fadeIn">Create Account</a>
-									</div>
+									<button type="button" href="{% url 'register user' %}" class="js-animation-link btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium">
+										<!-- <a type="button" href="{% url 'register user' %}" class="js-animation-link btn btn-block py-3 rounded-0 btn-outline-dark font-weight-medium"></a> -->
+											Create Account
+
+									</button>
 								</div>
 							</div>
 
-							<!-- Signup -->
+							<!-- Register -->
+							<form method="post" id="" action="{% url 'register user' %}">
+							{% csrf_token %}
 							<div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
 								<!-- Title -->
 								<header class="border-bottom px-4 px-md-6 py-4">
@@ -92,37 +93,43 @@
 								</header>
 								<!-- End Title -->
 
+
+
 								<div class="p-4 p-md-6">
 									<!-- Form Group -->
-									<div class="form-group mb-4">
-										<div class="js-form-message js-focus-state">
-											<label id="signinEmailLabel1" class="form-label" for="signinEmail1">Email *</label>
-											<input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail1" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel1" required>
-										</div>
-									</div>
-									<!-- End Form Group -->
 
-									<!-- Form Group -->
-									<div class="form-group mb-4">
-										<div class="js-form-message js-focus-state">
-											<label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Password *</label>
-											<input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword1" placeholder="" aria-label="" aria-describedby="signinPasswordLabel1" required>
+										<div class="form-group mb-4">
+											<div class="js-form-message js-focus-state">
+												<label id="signinEmailLabel1" class="form-label" for="signinEmail1">Email *</label>
+												<!-- <input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail1" placeholder="ilovebooks@bookworm.com" aria-label="ilovebooks@bookworm.com" aria-describedby="signinEmailLabel1" required> -->
+												{{ register_form.email }}
+											</div>
 										</div>
-									</div>
-									<!-- End Form Group -->
+										<!-- End Form Group -->
 
-									<!-- Form Group -->
-									<div class="form-group mb-4">
-										<div class="js-form-message js-focus-state">
-											<label id="signupConfirmPasswordLabel" class="form-label" for="signupConfirmPassword">Confirm Password *</label>
-											<input type="password" class="form-control rounded-0 height-4 px-4" name="confirmPassword" id="signupConfirmPassword" placeholder="" aria-label="" aria-describedby="signupConfirmPasswordLabel" required>
+										<!-- Form Group -->
+										<div class="form-group mb-4">
+											<div class="js-form-message js-focus-state">
+												<label id="signinPasswordLabel1" class="form-label" for="signinPassword1">Password *</label>
+												{{ register_form.password1 }}
+												<!-- <input type="password" class="form-control rounded-0 height-4 px-4" name="password" id="signinPassword1" placeholder="" aria-label="" aria-describedby="signinPasswordLabel1" required> -->
+											</div>
 										</div>
-									</div>
-									<!-- End Input -->
+										<!-- End Form Group -->
 
-									<div class="mb-3">
-										<button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create Account</button>
-									</div>
+										<!-- Form Group -->
+										<div class="form-group mb-4">
+											<div class="js-form-message js-focus-state">
+												<label id="signupConfirmPasswordLabel" class="form-label" for="signupConfirmPassword">Confirm Password *</label>
+												{{ register_form.password2 }}
+												<!-- <input type="password" class="form-control rounded-0 height-4 px-4" name="confirmPassword" id="signupConfirmPassword" placeholder="" aria-label="" aria-describedby="signupConfirmPasswordLabel" required> -->
+											</div>
+										</div>
+										<!-- End Input -->
+
+										<div class="mb-3">
+											<button type="submit" class="btn btn-block py-3 rounded-0 btn-dark">Create Account</button>
+										</div>
 
 									<div class="text-center mb-4">
 										<span class="small text-muted">Already have an account?</span>
@@ -134,7 +141,8 @@
 									</div>
 								</div>
 							</div>
-							<!-- End Signup -->
+							</form>
+							<!-- End Register -->
 
 							<!-- Forgot Password -->
 							<div id="forgotPassword" style="display: none; opacity: 0;" data-target-group="idForm">
@@ -149,7 +157,7 @@
 									<div class="form-group mb-4">
 										<div class="js-form-message js-focus-state">
 											<label id="signinEmailLabel3" class="form-label" for="signinEmail3">Email *</label>
-											<input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail3" placeholder="creativelayers088@gmail.com" aria-label="creativelayers088@gmail.com" aria-describedby="signinEmailLabel3" required>
+											<input type="email" class="form-control rounded-0 height-4 px-4" name="email" id="signinEmail3" placeholder="ilovebooks@bookworm.com" aria-label="ilovebooks@bookworm.com" aria-describedby="signinEmailLabel3" required>
 										</div>
 									</div>
 									<!-- End Form Group -->
@@ -169,7 +177,7 @@
 								</div>
 							</div>
 							<!-- End Forgot Password -->
-						</form>
+						<!-- </form> -->
 					</div>
 				</div>
 				<!-- End Content -->

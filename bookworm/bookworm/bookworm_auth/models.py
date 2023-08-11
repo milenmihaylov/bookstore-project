@@ -18,7 +18,8 @@ class BookwormUserManager(BaseUserManager):
 		# manager method can be used in migrations. This is fine because
 		# managers are by definition working on the real model.
 		user = self.model(email=email, **extra_fields)
-		user.password = make_password(password)
+		user.set_password(password)
+		# user.password = make_password(password)
 		user.save(using=self._db)
 		return user
 
@@ -44,7 +45,6 @@ class BookwormUser(AbstractBaseUser, PermissionsMixin):
 		unique=True,
 	)
 	is_staff = models.BooleanField(
-		_("staff status"),
 		default=False,
 		help_text=_("Designates whether the user can log into this admin site."),
 	)
@@ -53,5 +53,5 @@ class BookwormUser(AbstractBaseUser, PermissionsMixin):
 
 	objects = BookwormUserManager()
 
-	EMAIL_FIELD = "email"
 	USERNAME_FIELD = "email"
+

@@ -13,13 +13,17 @@
 				<li class="nav-item"><a href="#" class="nav-link link-black-100"><i class="glph-icon flaticon-heart"></i></a></li>
 				<li class="nav-item">
 					<!-- Account Sidebar Toggle Button -->
-					<a id="sidebarNavToggler" href="javascript:" role="button" class="nav-link link-black-100"
+					<a id="sidebarNavToggler"
+					   href={% if user.is_authenticated %}"{% url 'account details' %}"
+					   		{% else %}{% url 'login user' %}
+					   		{% endif %}
+					   role="button" class="nav-link link-black-100"
 						aria-controls="sidebarContent"
 						aria-haspopup="true"
 						aria-expanded="false"
 						data-unfold-event="click"
 						data-unfold-hide-on-scroll="false"
-						data-unfold-target="#sidebarContent"
+
 						data-unfold-type="css-animation"
 						data-unfold-overlay='{
 							"className": "u-sidebar-bg-overlay",
@@ -30,7 +34,7 @@
 						data-unfold-animation-out="fadeOutRight"
 						data-unfold-duration="500">
 						<i class="glph-icon flaticon-user"></i>
-					</a>
+					</a>  <!-- data-unfold-target="#sidebarContent"-->
 					<!-- End Account Sidebar Toggle Button -->
 				</li>
 				<li class="nav-item">

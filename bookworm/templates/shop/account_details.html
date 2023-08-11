@@ -1,0 +1,70 @@
+{% extends 'shop/my-account.html' %}
+{% block title %}
+	Account | Bookworm
+{% endblock %}
+
+{% block account_page %}
+
+
+		<div class="border-bottom mb-6 pb-6 mb-lg-8 pb-lg-9">
+			<div class="pt-5 pl-md-5 pt-lg-8 pl-lg-9">
+				<h6 class="font-weight-medium font-size-7 ml-lg-1 mb-lg-8 pb-xl-1">Account Details</h6>
+				<form method="post" href="{% url 'account details' %}">
+					{% csrf_token %}
+					<div class="font-weight-medium font-size-22 mb-4 pb-xl-1">Edit Account</div>
+						<div class="row">
+							<div class="col-md-6 mb-4">
+								<div class="js-form-message">
+									<label for="exampleFormControlInput1">First name *</label>
+									{{ form.first_name }}
+								</div>
+							</div>
+							<div class="col-md-6 mb-4">
+								<div class="js-form-message">
+									<label for="exampleFormControlInput2">Last name *</label>
+									{{ form.last_name }}
+								</div>
+							</div>
+							<div class="col-md-12 mb-4 mb-md-0">
+								<div class="js-form-message">
+									<label for="exampleFormControlInput4">Email address</label>
+									<h6>{{ user.email }}</h6>
+								</div>
+							</div>
+							<div class="ml-3">
+								<button type="submit" class="btn btn-wide btn-dark text-white rounded-0 transition-3d-hover height-60 width-390">Save Changes</button>
+							</div>
+						</div>
+				</form>
+			</div>
+		</div>
+		<!-- <div class="pl-md-5 pl-lg-9 space-bottom-2 space-bottom-lg-3">
+			<div class="font-weight-medium font-size-22 mb-4 pb-xl-1">Password Change</div>
+			<div class="row">
+				<div class="col-md-12 mb-4">
+					<div class="js-form-message">
+						<label for="exampleFormControlInput5">Current Password</label>
+						<input type="password" class="form-control rounded-0" name="name" id="exampleFormControlInput5" aria-label="Jack Wayley" required="" data-error-class="u-has-error" data-msg="Please enter your name." data-success-class="u-has-success">
+						{{ pass_change_form.old_password }}
+					</div>
+				</div>
+				<div class="col-md-12 mb-4">
+					<div class="js-form-message">
+						<label for="exampleFormControlInput6">New Password</label>
+						<input type="password" class="form-control rounded-0" name="name" id="exampleFormControlInput6" aria-label="Jack Wayley" required="" data-error-class="u-has-error" data-msg="Please enter your name." data-success-class="u-has-success">
+						{{ pass_change_form.new_password1 }}
+					</div>
+				</div>
+				<div class="col-md-12 mb-5">
+					<div class="js-form-message">
+						<label for="exampleFormControlInput7">Confirm new password</label>
+						<input type="password" class="form-control rounded-0" name="name" id="exampleFormControlInput7" aria-label="Jack Wayley" required="" data-error-class="u-has-error" data-msg="Please enter your name." data-success-class="u-has-success">
+						{{ pass_change_form.new_password2 }}
+					</div>
+				</div>
+
+			</div>
+		</div>-->
+
+
+{% endblock %}

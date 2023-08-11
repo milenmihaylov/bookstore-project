@@ -1,0 +1,46 @@
+<div class="col-md-3 border-right">
+	<h6 class="font-weight-medium font-size-7 pt-5 pt-lg-8  mb-5 mb-lg-7">My account</h6>
+	<div class="tab-wrapper">
+		<ul class="my__account-nav nav flex-column mb-0" role="tablist" id="pills-tab">
+			{% if user.is_authenticated %}
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0 active" id="pills-one-example1-tab" href="{% url 'dashboard' %}" role="tab" aria-controls="pills-one-example1" aria-selected="false">
+					<span class="font-weight-normal text-gray-600">Dashboard</span>
+				</a>
+			</li>
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0" id="pills-two-example1-tab" href="{% url 'orders' %}" role="tab" aria-controls="pills-two-example1" aria-selected="false">
+					<span class="font-weight-normal text-gray-600">Orders</span>
+				</a>
+			</li>
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0" id="pills-five-example1-tab" href="{% url 'account details' 	%}" role="tab" aria-controls="pills-five-example1" aria-selected="false">
+					<span class="font-weight-normal text-gray-600">Account details</span>
+				</a>
+			</li>
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0" id="pills-six-example1-tab" href="{% url 'wishlist' %}" role="tab" aria-controls="pills-six-example1" aria-selected="false">
+					<span class="font-weight-normal text-gray-600">Wishlist</span>
+				</a>
+			</li>
+
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0" href="{% url 'logout user' %}">
+					<span class="font-weight-normal text-gray-600">Logout</span>
+				</a>
+			</li>
+			{% else %}
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0" href="{% url 'login user' %}">
+					<span class="font-weight-normal text-gray-600">Login</span>
+				</a>
+			</li>
+			<li class="nav-item mx-0">
+				<a class="nav-link d-flex align-items-center px-0" href="{% url 'register user' %}">
+					<span class="font-weight-normal text-gray-600">Register</span>
+				</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+</div>

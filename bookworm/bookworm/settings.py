@@ -3,6 +3,8 @@ from os.path import join
 import environ
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
@@ -87,18 +89,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-	{
-		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-	},
-	{
-		'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-	},
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+	# },
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+	# },
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+	# },
+	# {
+	# 	'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+	# },
 ]
 
 # Internationalization
@@ -131,3 +133,7 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'bookworm_auth.BookwormUser'
+
+LOGIN_URL = reverse_lazy('login user')
+
+AUTHENTICATION_BACKENDS = ['bookworm.bookworm_auth.backends.EmailBackend']
