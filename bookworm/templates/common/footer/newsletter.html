@@ -4,11 +4,15 @@
 		<p class="text-gray-700">Signup to be the first to hear about exclusive deals, special offers and upcoming collections</p>
 	</div>
 	<!-- Form Group -->
+	<form method="post" action="{% url 'newsletter subscribe' %}" enctype="multipart/form-data">
 	<div class="form-row justify-content-center">
+
+			{% csrf_token %}
 		<div class="col-md-5 mb-3 mb-md-2">
 			<div class="js-form-message">
 				<div class="input-group">
-					<input type="text" class="form-control px-5 height-60 border-dark" name="name" id="signupSrName" placeholder="Enter email for weekly newsletter." aria-label="Your name" required="" data-msg="Name must contain only letters." data-error-class="u-has-error" data-success-class="u-has-success">
+					<!-- <input type="text" class="form-control px-5 height-60 border-dark" name="name" id="signupSrName" placeholder="Enter email for weekly newsletter." aria-label="Your name" required="" data-msg="Name must contain only letters." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+					{{ newsletter_form.email }}
 				</div>
 			</div>
 		</div>
@@ -16,6 +20,8 @@
 			<button type="submit" class="btn btn-dark rounded-0 btn-wide py-3 font-weight-medium">Subscribe
 			</button>
 		</div>
+
 	</div>
+	</form>
 	<!-- End Form Group -->
 </div>

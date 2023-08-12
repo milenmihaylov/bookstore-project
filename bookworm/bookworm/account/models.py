@@ -23,3 +23,6 @@ class Account(models.Model):
 		primary_key=True,
 		on_delete=models.CASCADE,
 	)
+
+	def __str__(self):
+		return f"{self.user_id}: {self.first_name} {self.last_name}, {self.user}"

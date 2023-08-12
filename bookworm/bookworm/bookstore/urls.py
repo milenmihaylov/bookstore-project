@@ -2,10 +2,12 @@ from django.urls import path
 
 from bookworm.bookstore.views.author import AuthorCreateView, AuthorUpdateView, AuthorDeleteView, AuthorDetailView, \
 	AuthorsListView
-from bookworm.bookstore.views.book import BookDetailView, BookCreateView, AddToWishlistView, ReviewBookView
+from bookworm.bookstore.views.book import BookDetailView, BookCreateView, ReviewBookView, \
+	BookUpdateView, BookDeleteView, BookListView
 from bookworm.bookstore.views.category import CategoryCreateView, CategoryUpdateView, CategoryDeleteView, \
 	CategoryListView
-from bookworm.bookstore.views.index import IndexView
+from bookworm.bookstore.views.index import IndexView, NewsletterSubscribeFormView, AboutUsView, TermsAndConditionsView, \
+	ContactView, FAQView
 
 urlpatterns = [
 	path('', IndexView.as_view(), name='index'),
@@ -22,8 +24,17 @@ urlpatterns = [
 	path('delete-category/<int:pk>/', CategoryDeleteView.as_view(), name='delete category'),
 
 	path('book/<int:pk>/', BookDetailView.as_view(), name='book detail'),
+	path('books/<int:pk>/', BookListView.as_view(), name='list books'),
 	path('create-book/', BookCreateView.as_view(), name='create book'),
+	path('update-book/<int:pk>/', BookUpdateView.as_view(), name='update book'),
+	path('delete-book/<int:pk>/', BookDeleteView.as_view(), name='delete book'),
 
-	path('add-to-wishlist/<int:pk>', AddToWishlistView.as_view(), name='add to wishlist'),
 	path('submit-review/', ReviewBookView.as_view(), name='submit review'),
+
+	path('newsletter-subscribe/', NewsletterSubscribeFormView.as_view(), name='newsletter subscribe'),
+
+	path('about-us/', AboutUsView.as_view(), name='about us'),
+	path('terms-and-conditions/', TermsAndConditionsView.as_view(), name='terms'),
+	path('contact/', ContactView.as_view(), name='contact'),
+	path('faq/', FAQView.as_view(), name='faq'),
 ]

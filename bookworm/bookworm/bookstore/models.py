@@ -5,12 +5,15 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from bookworm.bookstore.validators import validate_isbn_length
+
 USER_MODEL = get_user_model()
 
 
 class Author(models.Model):
 	name = models.CharField(
 		max_length=30,
+		unique=True,
 	)
 	image = models.ImageField(
 		upload_to='images/authors',
@@ -24,6 +27,7 @@ class Author(models.Model):
 class Category(models.Model):
 	category = models.CharField(
 		max_length=30,
+		unique=True,
 	)
 
 	def __str__(self):
@@ -114,6 +118,15 @@ class Book(models.Model):
 		blank=True,
 		null=True,
 	)
+	isbn = models.CharField(
+		validators=[
+			validate_isbn_length,
+		],
+		null=True,
+	)
+
+	def __str__(self):
+		return f'{self.title}, {self.author}'
 
 
 class Review(models.Model):
@@ -142,12 +155,19 @@ class Review(models.Model):
 
 class Wishlist(models.Model):
 	book = models.ForeignKey(
-		to=Book,
+		Book,
 		on_delete=models.CASCADE,
 	)
 	user = models.ForeignKey(
-		to=USER_MODEL,
+		USER_MODEL,
 		on_delete=models.CASCADE,
-		null=True,
 	)
 
+
+class NewsletterList(models.Model):
+	email = models.EmailField(
+		unique=True,
+	)
+
+	def __str__(self):
+		return self.email

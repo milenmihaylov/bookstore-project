@@ -11,10 +11,10 @@ class CategoryCreateView(CategoriesNavMixin, StaffOnlyTestMixin, CreateView):
 	model = Category
 	template_name = 'create-category.html'
 	fields = '__all__'
-	success_url = reverse_lazy('index')
+	success_url = reverse_lazy('create category')
 
 
-class CategoryListView(CategoriesNavMixin, ListView):
+class CategoryListView(CategoriesNavMixin, StaffOnlyTestMixin, ListView):
 	model = Category
 	template_name = 'all-categories.html'
 	context_object_name = 'categories'

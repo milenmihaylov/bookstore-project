@@ -1,6 +1,6 @@
 from django import forms
 
-from bookworm.bookstore.models import Category, Review
+from bookworm.bookstore.models import Category, Review, NewsletterList, Book
 
 
 class CategoryCreateForm(forms.ModelForm):
@@ -35,3 +35,43 @@ class ReviewForm(forms.ModelForm):
 			),
 		}
 
+
+class NewsletterListForm(forms.ModelForm):
+	def clean_email(self):
+		email = self.cleaned_data['email']
+		if NewsletterList.objects.filter(email=email).first():
+			msg = 'Email already subscribed!'
+			raise forms.ValidationError(msg)
+		return email
+
+	class Meta:
+		model = NewsletterList
+		fields = '__all__'
+		field_classes = {'email': forms.EmailField}
+		widgets = {
+			'email': forms.EmailInput(
+				attrs={
+					'input type': "text",
+					'class': "form-control px-5 height-60 border-dark",
+					'name': "name",
+					'id': "signupSrName",
+					'placeholder': "Enter email for weekly newsletter.",
+					'aria-label': "Your name",
+					'required': "",
+					'data-success-class': "u-has-success",
+				}
+			)
+		}
+
+
+class BookCreateForm(forms.ModelForm):
+	class Meta:
+		model = Book
+		exclude = ('ave_rating',)
+		widgets = {
+			'publication_date': forms.DateInput(
+				attrs={
+					'type': 'text',
+				}
+			)
+		}

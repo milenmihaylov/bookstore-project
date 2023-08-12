@@ -8,7 +8,7 @@ class Article(models.Model):
 		max_length=30,
 	)
 	title = models.CharField(
-		max_length=50,
+		max_length=100,
 	)
 	text = models.TextField()
 	image = models.ImageField(

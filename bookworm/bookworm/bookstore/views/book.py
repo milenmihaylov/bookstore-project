@@ -1,15 +1,21 @@
+from os.path import join
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView, CreateView, FormView
+from django.views.generic import DetailView, CreateView, FormView, UpdateView, DeleteView, ListView, TemplateView
 
-from bookworm.bookstore.forms import ReviewForm
+from bookworm import settings
+from bookworm.bookstore.forms import ReviewForm, BookCreateForm
 from bookworm.bookstore.models import Book, Wishlist
+from bookworm.core.clean_up import clean_up_files
 from bookworm.core.mixins import StaffOnlyTestMixin
+from bookworm.core.views import CategoriesNavMixin
 
 
-class BookDetailView(DetailView):
+class BookDetailView(CategoriesNavMixin, DetailView):
 	model = Book
 	template_name = 'shop/single-book.html'
 
@@ -19,10 +25,20 @@ class BookDetailView(DetailView):
 		return context
 
 
-class BookCreateView(StaffOnlyTestMixin, CreateView):
+class BookCreateView(CategoriesNavMixin, StaffOnlyTestMixin, CreateView):
 	model = Book
+	form_class = BookCreateForm
+	template_name = 'shop/create-book.html'
+
+	def get_success_url(self):
+		return reverse_lazy('book detail', kwargs={'pk': self.object.id})
+
+
+class BookUpdateView(CategoriesNavMixin, StaffOnlyTestMixin, UpdateView):
+	model = Book
+	template_name = 'update-book.html'
 	fields = ('title',
-			  'author'
+			  'author',
 			  'price',
 			  'cover_image',
 			  'back_cover_image',
@@ -31,32 +47,23 @@ class BookCreateView(StaffOnlyTestMixin, CreateView):
 			  'long_description',
 			  'format',
 			  'pages',
-			  'dimensions,'
+			  'dimensions',
 			  'publication_date',
 			  'publisher',
-			  'language'
+			  'language',
 			  )
-
-	template_name = 'shop/create-book.html'
 
 	def get_success_url(self):
 		return reverse_lazy('book detail', kwargs={'pk': self.object.id})
 
 
-class AddToWishlistView(LoginRequiredMixin, View):
-
-	def get(self, request, pk):
-		book = Book.objects.get(pk=pk)
-		wishlist_object = book.wishlist_set.filter(user_id=request.user.id).first()
-		if not wishlist_object:
-			Wishlist(
-				book=book,
-				user=request.user,
-			).save()
-		return redirect('book detail', pk)
+class BookDeleteView(CategoriesNavMixin, StaffOnlyTestMixin, DeleteView):
+	model = Book
+	template_name = 'delete-book.html'
+	success_url = reverse_lazy('authors list')
 
 
-class ReviewBookView(LoginRequiredMixin, FormView):
+class ReviewBookView(CategoriesNavMixin, LoginRequiredMixin, FormView):
 	form_class = ReviewForm
 	template_name = 'shop/single-book.html'
 
@@ -79,3 +86,14 @@ class ReviewBookView(LoginRequiredMixin, FormView):
 		ave_rating = round(total / count, 1)
 		obj.ave_rating = ave_rating
 		obj.save()
+
+
+class BookListView(CategoriesNavMixin, TemplateView):
+	template_name = 'shop/all-products-v6.html'
+
+	def get_context_data(self, **kwargs):
+		book_list = Book.objects.filter(category=self.kwargs['pk'])
+		context = super().get_context_data(**kwargs)
+		context['book_list'] = book_list
+		return context
+

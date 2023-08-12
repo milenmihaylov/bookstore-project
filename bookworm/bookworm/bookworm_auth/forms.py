@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth import get_user_model, authenticate, password_validation
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
-from django.forms import EmailField
 
 USER_MODEL = get_user_model()
 
@@ -52,7 +51,6 @@ class LogInForm(AuthenticationForm):
 
 
 class RegisterForm(UserCreationForm):
-
 	password1 = forms.CharField(
 		label="Password",
 		strip=False,
@@ -91,7 +89,7 @@ class RegisterForm(UserCreationForm):
 	class Meta:
 		model = USER_MODEL
 		fields = ('email',)
-		field_classes = {"email": EmailField}
+		field_classes = {"email": forms.EmailField}
 		widgets = {
 			'email': forms.EmailInput(
 				attrs={
