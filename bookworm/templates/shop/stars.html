@@ -1,0 +1,34 @@
+<span class="text-yellow-darker">
+	<span class="fas fa-star"></span>
+	{% if book.ave_rating < 1.5 %}
+		<span class="far fa-star"></span>
+		<span class="far fa-star"></span>
+		<span class="far fa-star"></span>
+		<span class="far fa-star"></span>
+	{% elif book.ave_rating < 2.5 %}
+		<span class="fas fa-star"></span>
+
+		<span class="far fa-star"></span>
+		<span class="far fa-star"></span>
+		<span class="far fa-star"></span>
+
+	{% elif book.ave_rating < 3.5 %}
+		<span class="fas fa-star"></span>
+		<span class="fas fa-star"></span>
+
+		<span class="far fa-star"></span>
+		<span class="far fa-star"></span>
+
+	{% elif book.ave_rating < 4.4 %}
+		<span class="fas fa-star"></span>
+		<span class="fas fa-star"></span>
+		<span class="fas fa-star"></span>
+
+		<span class="far fa-star"></span>
+	{% else %}
+		<span class="fas fa-star"></span>
+		<span class="fas fa-star"></span>
+		<span class="fas fa-star"></span>
+		<span class="fas fa-star"></span>
+	{% endif %}
+</span>

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -41,5 +42,5 @@ class RegisterView(CreateView):
 	success_url = reverse_lazy('login user')
 
 
-class LogoutUserView(LogoutView):
+class LogoutUserView(LoginRequiredMixin, LogoutView):
 	next_page = reverse_lazy('index')

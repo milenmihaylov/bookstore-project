@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DetailView, UpdateView
@@ -15,7 +16,8 @@ class ShowDashboard(TemplateView):
 		context['account'] = Account.objects.get(pk=self.request.user.id)
 		return context
 
-class AccountDetails(UpdateView):
+
+class AccountDetails(LoginRequiredMixin, UpdateView):
 	model = Account
 	context_object_name = 'account'
 	template_name = 'shop/account_details.html'
@@ -34,9 +36,9 @@ class AccountDetails(UpdateView):
 		return context
 
 
-class WishlistDetails(TemplateView):
+class WishlistDetails(LoginRequiredMixin, TemplateView):
 	template_name = 'shop/account-wishlist.html'
 
 
-class OrdersView(TemplateView):
+class OrdersView(LoginRequiredMixin, TemplateView):
 	template_name = 'shop/orders-all.html'

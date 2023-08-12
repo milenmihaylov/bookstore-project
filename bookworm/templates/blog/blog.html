@@ -7,7 +7,7 @@
 {% block main_content %}
     <main id="content">
         <div class="mb-5 mb-lg-8">
-			<a href="{% url 'create article'%}" class="btn btn-block btn-outline-dark">Create Article</a>
+			{% if user.is_staff %}<a href="{% url 'create article'%}" class="btn btn-block btn-outline-dark">Create Article</a>{% endif %}
                 <div class="container">
 				<p></p>
                     <div class="tab-content">
@@ -21,10 +21,10 @@
 												<img class="img-fluid" src="{{ article.image.url }}" alt="{{ article.title }}">
 											</a>
 											<div class="mb-2">
-												<a class="font-size-2" href="../blog/blog-single.html">Romance</a>
+												<a class="font-size-2" href="article-single.html">Romance</a>
 											</div>
 											<h6 class="font-size-26 crop-text-2 font-weight-medium text-lh-1dot4">
-												<a href="../blog/blog-single.html">{{ article.title }}</a>
+												<a href="article-single.html">{{ article.title }}</a>
 											</h6>
 											<div class="font-size-2 text-secondary-gray-700">
 												<span>{{ article.date }}</span>

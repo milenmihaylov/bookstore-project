@@ -3,10 +3,11 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from bookworm.bookstore.forms import CategoryCreateForm
 from bookworm.bookstore.models import Category
+from bookworm.core.mixins import StaffOnlyTestMixin
 from bookworm.core.views import CategoriesNavMixin
 
 
-class CategoryCreateView(CategoriesNavMixin, CreateView):
+class CategoryCreateView(CategoriesNavMixin, StaffOnlyTestMixin, CreateView):
 	model = Category
 	template_name = 'create-category.html'
 	fields = '__all__'
@@ -19,14 +20,14 @@ class CategoryListView(CategoriesNavMixin, ListView):
 	context_object_name = 'categories'
 
 
-class CategoryUpdateView(CategoriesNavMixin, UpdateView):
+class CategoryUpdateView(CategoriesNavMixin, StaffOnlyTestMixin, UpdateView):
 	model = Category
 	template_name = 'update-category.html'
 	fields = '__all__'
 	success_url = reverse_lazy('all categories')
 
 
-class CategoryDeleteView(CategoriesNavMixin, DeleteView):
+class CategoryDeleteView(CategoriesNavMixin, StaffOnlyTestMixin, DeleteView):
 	model = Category
 	template_name = 'delete-category.html'
 	success_url = reverse_lazy('all categories')

@@ -21,8 +21,10 @@
                                             {{ author.name }}
                                         </h6>
                                         <p class="mb-0">{{ author.about }}</p>
+										{% if user.is_staff %}
 										<a href="{% url 'update author' author.id %}" class="btn btn-success">Edit Author</a>
 										<a href="{% url 'delete author' author.id %}" class="btn btn-danger">Delete Author</a>
+										{% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -59,33 +61,26 @@
 								<div class="product__inner overflow-hidden p-4d875">
 									<div class="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
 										<div class="woocommerce-loop-product__thumbnail">
-											<a href="../shop/single-product-v5.html" class="d-block"><img src="{{ book.cover_image.url }}" class="d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="{{ book.title }}"></a>
+											<a href="{% url 'book detail' book.id %}" class="d-block"><img src="{{ book.cover_image.url }}" class="d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid" alt="{{ book.title }}"></a>
 										</div>
 										<div class="woocommerce-loop-product__body product__body pt-3 bg-white">
-											<div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="../shop/single-product-v5.html">Paperback</a></div>
-											<h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="../shop/single-product-v5.html">{{ book.title }}</a></h2>
-											<div class="font-size-2  mb-1 text-truncate"><a href="../others/authors-single.html" class="text-gray-700">{{ book.author }}</a></div>
+											<div class="text-uppercase font-size-1 mb-1 text-truncate"><a href="">{{ book.format }}</a></div>
+											<h2 class="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"><a href="{% url 'book detail' book.id %}">{{ book.title }}</a></h2>
+											<div class="font-size-2  mb-1 text-truncate"><a href="" class="text-gray-700">{{ book.author }}</a></div>
 											<div class="price d-flex align-items-center font-weight-medium font-size-3">
 												<span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>{{ book.price }}</span>
 											</div>
 											<div class="product__rating d-flex align-items-center font-size-2">
 												<div class="text-yellow-darker mr-2">
-													<small class="fas fa-star"></small>
-													<small class="fas fa-star"></small>
-													<small class="fas fa-star"></small>
-													<small class="far fa-star"></small>
-													<small class="far fa-star"></small>
+													{% include 'shop/stars.html' %}
 												</div>
-												<div class="">(book.reviews_count)</div>
+												<div class="">({{ book.review_set.count  }})</div>
 											</div>
 										</div>
 										<div class="product__hover d-flex align-items-center">
 											<a href="../shop/single-product-v5.html" class="text-uppercase text-dark h-dark font-weight-medium mr-auto">
 												<span class="product__add-to-cart">ADD TO CART</span>
 												<span class="product__add-to-cart-icon font-size-4"><i class="flaticon-icon-126515"></i></span>
-											</a>
-											<a href="../shop/single-product-v5.html" class="mr-1 h-p-bg border-0 btn btn-outline-primary">
-												<i class="flaticon-switch"></i>
 											</a>
 											<a href="../shop/single-product-v5.html" class="h-p-bg border-0 btn btn-outline-primary">
 												<i class="flaticon-heart"></i>

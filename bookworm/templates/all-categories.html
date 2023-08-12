@@ -11,7 +11,7 @@
 </head>
 <body>
 	{% include 'common/HEADER.html' %}
-	<a href="{% url 'create category'%}" class="btn btn-block btn-outline-dark">Create Category</a>
+	{% if user.is_staff %}<a href="{% url 'create category'%}" class="btn btn-block btn-outline-dark">Create Category</a>{% endif %}
 		{% for c in categories %}
 			<p>
 				{{ c.category }}

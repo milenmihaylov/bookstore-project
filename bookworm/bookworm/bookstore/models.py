@@ -41,6 +41,13 @@ class Book(models.Model):
 		(FORMAT_CHOICE_KINDLE, 'Kindle'),
 	)
 
+	LANGUAGE_CHOICES = (
+		('English', 'english'),
+		('Bulgarian', 'bulgarian'),
+		('German', 'german'),
+		('French', 'french'),
+	)
+
 	title = models.CharField(
 		max_length=50,
 	)
@@ -82,11 +89,12 @@ class Book(models.Model):
 	pages = models.PositiveIntegerField()
 	dimensions = models.CharField(
 		max_length=30,
-		default=''
+		blank=True,
+		null=True
 	)
 	publication_date = models.DateField(
 		blank=True,
-		default=date.today
+		null=True,
 	)
 	publisher = models.CharField(
 		max_length=30,
@@ -94,7 +102,17 @@ class Book(models.Model):
 	)
 	language = models.CharField(
 		max_length=30,
-		default='',
+		choices=LANGUAGE_CHOICES,
+	)
+	ave_rating = models.DecimalField(
+		max_digits=2,
+		decimal_places=1,
+		validators=[
+			MinValueValidator(1),
+			MaxValueValidator(5),
+		],
+		blank=True,
+		null=True,
 	)
 
 
