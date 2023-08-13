@@ -3,7 +3,7 @@ from django.urls import path
 from bookworm.bookstore.views.author import AuthorCreateView, AuthorUpdateView, AuthorDeleteView, AuthorDetailView, \
 	AuthorsListView
 from bookworm.bookstore.views.book import BookDetailView, BookCreateView, ReviewBookView, \
-	BookUpdateView, BookDeleteView, BookListView
+	BookUpdateView, BookDeleteView, BookListView, book_search, BookSearch
 from bookworm.bookstore.views.category import CategoryCreateView, CategoryUpdateView, CategoryDeleteView, \
 	CategoryListView
 from bookworm.bookstore.views.index import IndexView, NewsletterSubscribeFormView, AboutUsView, TermsAndConditionsView, \
@@ -30,6 +30,7 @@ urlpatterns = [
 	path('delete-book/<int:pk>/', BookDeleteView.as_view(), name='delete book'),
 
 	path('submit-review/', ReviewBookView.as_view(), name='submit review'),
+	path('search/', BookSearch.as_view(), name='search'),
 
 	path('newsletter-subscribe/', NewsletterSubscribeFormView.as_view(), name='newsletter subscribe'),
 

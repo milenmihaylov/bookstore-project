@@ -53,7 +53,7 @@ class Book(models.Model):
 	)
 
 	title = models.CharField(
-		max_length=50,
+		max_length=100,
 	)
 	author = models.ForeignKey(
 		to=Author,
@@ -64,7 +64,7 @@ class Book(models.Model):
 		max_digits=7,
 		decimal_places=2,
 		validators=[
-			MinValueValidator(Decimal(0.00)),
+			MinValueValidator(Decimal(0.01)),
 		],
 	)
 	cover_image = models.ImageField(

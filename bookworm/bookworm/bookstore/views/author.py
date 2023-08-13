@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, DetailView, ListView, UpdateView, DeleteView
 
 from bookworm import settings
+from bookworm.bookstore.forms import AuthorForm
 from bookworm.bookstore.models import Author
 from bookworm.core.clean_up import clean_up_files
 from bookworm.core.mixins import StaffOnlyTestMixin
@@ -13,7 +14,7 @@ from bookworm.core.views import CategoriesNavMixin
 class AuthorCreateView(CategoriesNavMixin, StaffOnlyTestMixin, CreateView):
 	model = Author
 	template_name = 'create-author.html'
-	fields = '__all__'
+	form_class = AuthorForm
 
 	def get_success_url(self):
 		return reverse_lazy('author detail', kwargs={'pk': self.object.id})
@@ -38,7 +39,7 @@ class AuthorsListView(CategoriesNavMixin, ListView):
 class AuthorUpdateView(CategoriesNavMixin, StaffOnlyTestMixin, UpdateView):
 	model = Author
 	template_name = 'update-author.html'
-	fields = '__all__'
+	form_class = AuthorForm
 
 	def form_valid(self, form):
 		old_image = self.get_object().image

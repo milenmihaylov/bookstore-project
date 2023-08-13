@@ -1,6 +1,21 @@
 from django import forms
 
-from bookworm.bookstore.models import Category, Review, NewsletterList, Book
+from bookworm.bookstore.models import Category, Review, NewsletterList, Book, Author
+
+
+class BookSearchForm(forms.Form):
+	search_query = forms.CharField(
+		max_length=100,
+		widget=forms.TextInput(
+			attrs={
+				'class': "form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100",
+				'type': "search",
+				'placeholder': "Search for Books by Keyword ...",
+				'aria-label': "Search",
+				'required': "",
+			}
+		)
+	)
 
 
 class CategoryCreateForm(forms.ModelForm):
@@ -64,6 +79,38 @@ class NewsletterListForm(forms.ModelForm):
 		}
 
 
+class AuthorForm(forms.ModelForm):
+	class Meta:
+		model = Author
+		fields = '__all__'
+		widgets = {
+			'name': forms.TextInput(
+				attrs={
+					'class': 'form-control rounded-0 p-4',
+					'name': 'companyName',
+					'id': "inputCompanyName",
+					'placeholder': "Author Name",
+				},
+			),
+			'image': forms.FileInput(
+				attrs={
+					'class': "img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image img-fluid",
+				},
+			),
+			'about': forms.Textarea(
+				attrs={
+					'input type': "text",
+					'class': "form-control px-5 height-60 border-dark",
+					'name': "name",
+					'id': "signupSrName",
+					'placeholder': "About",
+					'aria-label': "Your name",
+					'data-success-class': "u-has-success",
+				}
+			)
+		}
+
+
 class BookCreateForm(forms.ModelForm):
 	class Meta:
 		model = Book
@@ -71,7 +118,43 @@ class BookCreateForm(forms.ModelForm):
 		widgets = {
 			'publication_date': forms.DateInput(
 				attrs={
-					'type': 'text',
+
 				}
-			)
+			),
+			'title': forms.TextInput(
+				attrs={
+					'class': 'form-control rounded-0 p-4',
+					'name': 'companyName',
+					'id': "inputCompanyName",
+					'placeholder': "title",
+				},
+			),
+			'short_description': forms.Textarea(
+				attrs={
+					'input type': "text",
+					'class': "form-control px-5 height-60 border-dark",
+					'name': "name",
+					'id': "signupSrName",
+					'placeholder': "short description",
+					'aria-label': "Your name",
+					'required': "",
+					'data-success-class': "u-has-success",
+				}
+			),
+			'long_description': forms.Textarea(
+				attrs={
+					'input type': "text",
+					'class': "form-control px-5 height-60 border-dark",
+					'name': "name",
+					'id': "signupSrName",
+					'placeholder': "long description",
+					'aria-label': "Your name",
+					'required': "",
+					'data-success-class': "u-has-success",
+				}
+			),
+			'cover_image': forms.FileInput(),
+			'price': forms.NumberInput(),
+			'pages': forms.NumberInput(),
+
 		}

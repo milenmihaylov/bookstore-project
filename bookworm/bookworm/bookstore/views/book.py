@@ -8,7 +8,7 @@ from django.views import View
 from django.views.generic import DetailView, CreateView, FormView, UpdateView, DeleteView, ListView, TemplateView
 
 from bookworm import settings
-from bookworm.bookstore.forms import ReviewForm, BookCreateForm
+from bookworm.bookstore.forms import ReviewForm, BookCreateForm, BookSearchForm
 from bookworm.bookstore.models import Book, Wishlist
 from bookworm.core.clean_up import clean_up_files
 from bookworm.core.mixins import StaffOnlyTestMixin
@@ -97,3 +97,28 @@ class BookListView(CategoriesNavMixin, TemplateView):
 		context['book_list'] = book_list
 		return context
 
+
+class BookSearch(CategoriesNavMixin, View):
+	template_name = 'shop/all-products-v6.html'
+
+	def get(self, request, *args, **kwargs):
+		form = BookSearchForm(request.GET)
+		results = []
+		context = self.get_context_data(**kwargs)
+		if form.is_valid():
+			search_query = form.cleaned_data['search_query']
+			results = Book.objects.filter(title__icontains=search_query)
+			context['book_list'] = results
+
+		return render(request, self.template_name, context)
+
+
+def book_search(request):
+	form = BookSearchForm(request.GET)
+	results = []
+
+	if form.is_valid():
+		search_query = form.cleaned_data['search_query']
+		results = Book.objects.filter(title__icontains=search_query)  # Change field name as needed
+
+	return render(request, 'shop/all-products-v6.html', {'form': form, 'book_list': results})
