@@ -8,6 +8,8 @@ from bookworm.bookstore.models import Category
 from urllib.parse import quote
 from django.template import Context, Engine, loader, TemplateDoesNotExist
 
+from bookworm.cart.models import CartItem
+
 
 class CategoriesNavMixin:
 
@@ -16,8 +18,11 @@ class CategoriesNavMixin:
 			context = super().get_context_data(**kwargs)
 		else:
 			context = {}
+		if self.request.user.is_authenticated:
+			context['cart_items'] = CartItem.objects.filter(user=self.request.user)
 		context['categories'] = Category.objects.all()
 		context['search_form'] = BookSearchForm()
 		context['newsletter_form'] = NewsletterListForm
+
 		return context
 

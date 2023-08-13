@@ -60,7 +60,8 @@
 										<p class="">{{ book.short_description }}</p>
 									</div>
 
-                                <form class="cart d-md-flex align-items-center" method="post" enctype="multipart/form-data">
+                                <form class="cart d-md-flex align-items-center" action="{% url 'add to cart' book.id %}" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
                                     <div class="quantity mb-4 mb-md-0 d-flex align-items-center">
                                         <!-- Quantity -->
                                         <div class="border px-3 width-120">

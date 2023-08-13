@@ -9,4 +9,5 @@ urlpatterns = [
 	path('blog/', include('bookworm.blog.urls')),
 	path('', include('bookworm.bookworm_auth.urls')),
 	path('account/', include('bookworm.account.urls')),
+	path('cart/', include('bookworm.cart.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

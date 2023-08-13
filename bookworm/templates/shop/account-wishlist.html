@@ -42,7 +42,7 @@
 											<td class="align-middle py-5">${{ item.book.price }}</td>
 											<td class="align-middle py-5"></td>
 											<td class="align-middle py-5">
-												<span class="product__add-to-cart">ADD TO CART</span>
+												<a class="product__add-to-cart" type="submit" href="{% url 'add to cart' item.book.id %}">ADD TO CART</a>
 											</td>
 										</tr>
 									{% endfor %}
