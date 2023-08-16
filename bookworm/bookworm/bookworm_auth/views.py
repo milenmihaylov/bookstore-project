@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import CreateView, FormView
 
 from bookworm.bookworm_auth.forms import RegisterForm, LogInForm
@@ -27,7 +28,7 @@ def register_view(request):
 		return render(request, 'auth/register.html', context)
 
 
-class LoginUserView(LoginView):
+class LoginUserView(View):  # (LoginView):
 	template_name = 'auth/login.html'
 	form_class = LogInForm
 
@@ -42,5 +43,13 @@ class RegisterView(CreateView):
 	success_url = reverse_lazy('login user')
 
 
-class LogoutUserView(LoginRequiredMixin, LogoutView):
+class LogoutUserView(View):  # (LoginRequiredMixin, LogoutView):
 	next_page = reverse_lazy('index')
+
+
+class LoginGoogleView(LoginView):
+	template_name = 'auth/google-login.html'
+	form_class = LogInForm
+
+	def get_success_url(self):
+		return reverse_lazy('account details')
