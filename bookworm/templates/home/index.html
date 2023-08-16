@@ -1,20 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Title -->
-    <title>Home | Bookworm</title>
+{% extends 'common/BASE.html' %}
+    {% block title %}Home | Bookworm{% endblock %}
 
-    {% include 'common/header/head-formatting.html' %}
-</head>
-<body>
-    <!--===== HEADER CONTENT =====-->
-
-	{% include 'common/HEADER.html' %}
-
-    <!--===== END HEADER CONTENT =====-->
-
-    <!-- ====== MAIN CONTENT ====== -->
+{% block main_content %}
+	{% load static %}
     <section class="space-bottom-3">
         <div class="bg-gray-200 space-2 space-lg-0 bg-img-hero" style="background-image: url({% static 'img/1920x588/img1.jpg'%});">
             <div class="container">
@@ -224,13 +212,5 @@
             </ul>
         </div>
     </section>
-    <!-- ====== END MAIN CONTENT ====== -->
 
-    <!-- ========== FOOTER ========== -->
-    {% include 'common/FOOTER.html' %}
-    <!-- ========== END FOOTER ========== -->
-
-	{% include 'common/scripts.html' %}
-
-</body>
-</html>
+{% endblock %}

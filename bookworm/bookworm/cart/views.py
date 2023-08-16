@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 
-from bookworm.bookstore.models import Book
+from bookworm.bookstore.forms import BookSearchForm, NewsletterListForm
+from bookworm.bookstore.models import Book, Category
 from bookworm.cart.models import CartItem
 from bookworm.core.views import CategoriesNavMixin
 
@@ -31,7 +32,14 @@ def cart(request):
 	total_price = sum(item.book.price * item.quantity for item in cart_items)
 	for item in cart_items:
 		item.total = item.book.price * item.quantity
-	return render(request, 'shop/cart.html', {'cart_items': cart_items, 'total_price': total_price})
+	context = {
+		'categories': Category.objects.all(),
+		'search_form': BookSearchForm(),
+		'newsletter_form': NewsletterListForm,
+		'cart_items': cart_items,
+		'total_price': total_price,
+	}
+	return render(request, 'shop/cart.html', context)
 
 
 class AddToCartView(CategoriesNavMixin, LoginRequiredMixin, View):
