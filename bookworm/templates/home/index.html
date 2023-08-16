@@ -42,7 +42,9 @@
                             <div class="col-lg-5 col-wd-6"
                             data-scs-animation-in="fadeInRight"
                             data-scs-animation-delay="500">
+								<a href="{% url 'book detail' book.id %}">
                                 <img  src="{{ book.cover_image.url }}" height="580" alt="image-description">
+								</a>
                             </div>
                         </div>
                     </div>

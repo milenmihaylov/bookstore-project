@@ -51,6 +51,7 @@ class BookUpdateView(CategoriesNavMixin, StaffOnlyTestMixin, UpdateView):
 			  'publication_date',
 			  'publisher',
 			  'language',
+			  'featured',
 			  )
 
 	def get_success_url(self):

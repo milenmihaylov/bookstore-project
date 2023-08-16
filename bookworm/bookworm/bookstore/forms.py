@@ -114,7 +114,7 @@ class AuthorForm(forms.ModelForm):
 class BookCreateForm(forms.ModelForm):
 	class Meta:
 		model = Book
-		exclude = ('ave_rating',)
+		exclude = ('ave_rating', 'sold_copies')
 		widgets = {
 			'publication_date': forms.DateInput(
 				attrs={

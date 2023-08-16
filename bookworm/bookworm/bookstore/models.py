@@ -108,6 +108,12 @@ class Book(models.Model):
 		max_length=30,
 		choices=LANGUAGE_CHOICES,
 	)
+	featured = models.BooleanField(
+		default=False,
+	)
+	sold_copies = models.PositiveIntegerField(
+		default=0,
+	)
 	ave_rating = models.DecimalField(
 		max_digits=2,
 		decimal_places=1,

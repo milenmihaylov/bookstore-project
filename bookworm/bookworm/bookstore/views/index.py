@@ -13,7 +13,7 @@ class IndexView(CategoriesNavMixin, TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['featured_books'] = Book.objects.filter(ave_rating__gte=4.0)
+		context['featured_books'] = Book.objects.filter(featured=True)
 		context['bestselling_books'] = Book.objects.all()
 		context['favorite_authors'] = Author.objects.all()
 		context['arts_category'] = Category.objects.filter(category='Arts & Photography').first()
