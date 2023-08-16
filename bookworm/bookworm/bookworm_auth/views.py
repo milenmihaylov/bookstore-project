@@ -36,6 +36,10 @@ class LoginUserView(View):  # (LoginView):
 		return reverse_lazy('account details')
 
 
+def login_with_google(request):
+	return render(request, 'auth/google-login.html')
+
+
 class RegisterView(CreateView):
 	model = USER_MODEL
 	form_class = RegisterForm
@@ -43,13 +47,5 @@ class RegisterView(CreateView):
 	success_url = reverse_lazy('login user')
 
 
-class LogoutUserView(View):  # (LoginRequiredMixin, LogoutView):
+class LogoutUserView(LoginRequiredMixin, LogoutView):
 	next_page = reverse_lazy('index')
-
-
-class LoginGoogleView(LoginView):
-	template_name = 'auth/google-login.html'
-	form_class = LogInForm
-
-	def get_success_url(self):
-		return reverse_lazy('account details')

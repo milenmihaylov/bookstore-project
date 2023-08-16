@@ -34,6 +34,7 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.sites',
 
 	'allauth',
 	'allauth.account',
@@ -142,21 +143,30 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'bookworm_auth.BookwormUser'
 
-#LOGIN_URL = reverse_lazy('login user')
+# USER_MODEL_USERNAME_FIELD = 'email'
+#
+# AUTHENTICATION_METHOD = 'email'
+
+LOGIN_URL = reverse_lazy('login user')
+
+LOGIN_REDIRECT_URL = reverse_lazy('account details')
+
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
 AUTHENTICATION_BACKENDS = [
 	'bookworm.bookworm_auth.backends.EmailBackend',
 	'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1
-LOGIN_REDIRECT_URL = reverse_lazy('account details')
+SITE_ID = 2
 
 # Additional configuration settings
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
 
 SOCIALACCOUNT_PROVIDERS = {
 	'google': {

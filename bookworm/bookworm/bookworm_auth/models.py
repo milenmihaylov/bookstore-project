@@ -55,3 +55,4 @@ class BookwormUser(AbstractBaseUser, PermissionsMixin):
 
 	USERNAME_FIELD = "email"
 
+	REQUIRED_FIELDS = []
