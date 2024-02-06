@@ -21,7 +21,7 @@
 												<img class="img-fluid" src="{{ article.image.url }}" alt="{{ article.title }}">
 											</a>
 											<h6 class="font-size-26 crop-text-2 font-weight-medium text-lh-1dot4">
-												<a href="article-single.html">{{ article.title }}</a>
+												<a href="{% url 'article' article.id %}">{{ article.title }}</a>
 											</h6>
 											<div class="font-size-2 text-secondary-gray-700">
 												<span>{{ article.date }}</span>
