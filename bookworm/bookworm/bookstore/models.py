@@ -1,6 +1,7 @@
 from datetime import date
 from _decimal import Decimal
 
+from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+	{% load static %}
 	<meta charset="UTF-8">
 	<meta name="viewport"
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -8,12 +9,14 @@
 
 	<title>Create Author</title>
 	{% include 'common/header/head-formatting.html' %}
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
 </head>
 <body>
 	{% include 'common/HEADER.html' %}
 	<form method="post" class="furniture-form" action="{% url 'create author' %}" enctype="multipart/form-data">
-		{{ form }}
 		{% csrf_token %}
+		{{ form }}
 		<button type="submit" class="btn btn-success">Create</button>
 	</form>
 

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+	{% load static %}
 	<meta charset="UTF-8">
 	<meta name="viewport"
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -8,13 +9,14 @@
 
 	<title>Update {{ author.name }}</title>
 	{% include 'common/header/head-formatting.html' %}
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
 </head>
 <body>
 	{% include 'common/HEADER.html' %}
 	<form method="post" class="furniture-form" action="{% url 'update author' author.id %}" enctype="multipart/form-data">
 		{{ form }}
 		{% csrf_token %}
-		<button type="submit">Update</button>
+		<button type="submit" class="btn btn-success">Update</button>
 	</form>
 
 	{% include 'common/scripts.html' %}

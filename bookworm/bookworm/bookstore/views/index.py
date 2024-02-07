@@ -16,6 +16,7 @@ class IndexView(CategoriesNavMixin, TemplateView):
 		context['featured_books'] = Book.objects.filter(featured=True)
 		context['bestselling_books'] = Book.objects.all()
 		context['favorite_authors'] = Author.objects.all()
+		# TODO: categories here are hardcoded; need to be dynamic once category icons/images are fixed.
 		context['arts_category'] = Category.objects.filter(category='Arts & Photography').first()
 		context['food_category'] = Category.objects.filter(category='Food & Drink').first()
 		context['romance_category'] = Category.objects.filter(category='Romance').first()

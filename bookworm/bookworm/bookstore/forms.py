@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
 
 from bookworm.bookstore.models import Category, Review, NewsletterList, Book, Author
 
@@ -112,13 +113,14 @@ class AuthorForm(forms.ModelForm):
 
 
 class BookCreateForm(forms.ModelForm):
+
 	class Meta:
 		model = Book
 		exclude = ('ave_rating', 'sold_copies')
 		widgets = {
 			'publication_date': forms.DateInput(
 				attrs={
-
+					"type": "date"
 				}
 			),
 			'title': forms.TextInput(
@@ -126,19 +128,15 @@ class BookCreateForm(forms.ModelForm):
 					'class': 'form-control rounded-0 p-4',
 					'name': 'companyName',
 					'id': "inputCompanyName",
-					'placeholder': "title",
+					'placeholder': "Book Title",
 				},
 			),
 			'short_description': forms.Textarea(
 				attrs={
 					'input type': "text",
-					'class': "form-control px-5 height-60 border-dark",
-					'name': "name",
-					'id': "signupSrName",
-					'placeholder': "short description",
-					'aria-label': "Your name",
-					'required': "",
-					'data-success-class': "u-has-success",
+					# 'class': "form-control px-5 height-60 border-dark",
+					'id': "book-short-desc",
+					'placeholder': "Short Description...",
 				}
 			),
 			'long_description': forms.Textarea(
@@ -146,8 +144,8 @@ class BookCreateForm(forms.ModelForm):
 					'input type': "text",
 					'class': "form-control px-5 height-60 border-dark",
 					'name': "name",
-					'id': "signupSrName",
-					'placeholder': "long description",
+					'id': "book-long-desc",
+					'placeholder': "Long Description...",
 					'aria-label': "Your name",
 					'required': "",
 					'data-success-class': "u-has-success",
